@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from "next/server"
 import { PollyClient, SynthesizeSpeechCommand } from "@aws-sdk/client-polly"
 
@@ -11,8 +10,8 @@ const polly = new PollyClient({
 })
 
 export async function POST(req: NextRequest) {
-  
-  
+
+
   const { text } = await req.json()
   let modifiedText = text
   if (text.includes("Nigora")) {
@@ -20,14 +19,14 @@ export async function POST(req: NextRequest) {
       `<phoneme alphabet="ipa" ph="niːɡoːra">Nigora</phoneme>`
     )
   }
-  const ssml =`<speak>${modifiedText}</speak>`
+  const ssml = `<speak>${modifiedText}</speak>`
   const command = new SynthesizeSpeechCommand({
     OutputFormat: "mp3",
     TextType: "ssml",
     Text: ssml,
     VoiceId: "Elin",        // ← Svensk kvinnlig röst , altrnative is "Astrid" with Engine: "standard"
-    LanguageCode: "sv-SE",    
-    Engine: "neural",       
+    LanguageCode: "sv-SE",
+    Engine: "neural",
   })
   try {
     const response = await polly.send(command)
@@ -36,10 +35,14 @@ export async function POST(req: NextRequest) {
       return new NextResponse("Ingen ljudström från Polly", { status: 500 })
     }
     const audioBuffer = await response.AudioStream.transformToByteArray()
-    return new NextResponse(audioBuffer, {
+    const arrayBuffer = audioBuffer.buffer.slice(
+      audioBuffer.byteOffset,
+      audioBuffer.byteOffset + audioBuffer.byteLength
+    )
+    return new NextResponse(new Blob([arrayBuffer as ArrayBuffer], { type: "audio/mpeg" }), {
       headers: {
         "Content-Type": "audio/mpeg",
-        "Content-Length": audioBuffer.length.toString(),
+        "Content-Length": arrayBuffer.byteLength.toString(),
       },
     })
   } catch (error) {
