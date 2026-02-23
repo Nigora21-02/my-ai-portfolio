@@ -24,7 +24,7 @@ export const projectsData: Project[] = [
     category: 'Webb & Mobil',
     company: 'FixMeApp AB',
     mediaType: 'mobile',
-    title: ' AI-driven Booking Platform',
+    title: 'Cross-Platform Frontend & Arkitektur för AI-driven Bokningsplattform',
     image: ['/images/FixmeappPrompt 1.png', '/images/FixmeappPrompt.png', '/images/Fixmeapp3.png', '/images/Fixmeapp4.png', '/images/Fixmeapp5.png', '/images/Fixmeapp6.png', '/images/Fixmeapp7.png'],
     description: 'Arbetade som frontendutvecklare i utvecklingen av en AI-driven bokningsplattform. Ansvarade för cirka 80 % av frontend-delen och drev implementationen end-to-end i nära samarbete med seniora utvecklare. Byggde mobilapplikationen från grunden och Migrerade webbkomponenter till återanvändbara cross-platform-komponenter (React & React Native) och minskade duplicerad implementation med ~40 %, Implementerade core booking-flows inklusive profiler för användare, arbetare och leverantörer (salonger/frilansare). Fokuserade på clean och skalbar arkitektur med tydlig separation of concerns, isolerad affärslogik via custom hooks samt strukturerad folderstruktur. Använde React Query för API-integration mot FastAPI-backend och säkerställde konsekvent hantering av server state. Utvecklade dynamiska komponenter anpassade efter AI-baserade prompt-intentioner och var aktivt involverad i UX-processen för att säkerställa tydliga och användarcentrerade flöden.',
     stack: ['Next.js', 'React Native', 'Expo', 'TypeScript', 'Redux Toolkit', 'React Query', 'FastAPI', 'Orval'],
@@ -35,18 +35,16 @@ export const projectsData: Project[] = [
     category: 'UX / Design',
     company: 'Carmy AB',
     mediaType: 'design',
-    title: 'AI-driven fordonsdiagnostik',
-    description: 'Tog ägarskap över att förbättra autentiserings- och onboarding-flöden genom att identifiera UX- och produktproblem under interna granskningar. Genomförde produkt- och UX-research för att tydliggöra appens värdeerbjudande och redesignade tidiga användarflöden för att kommunicera värde innan kontoskapande. Designade den uppdaterade upplevelsen i Figma och implementerade samtliga godkända designlösningar i applikationen. Refaktorerade frontend-arkitekturen genom att separera UI-komponenter, affärslogik och navigationslager för förbättrad skalbarhet och underhållbarhet. Byggde återanvändbara komponenter och delade hooks samt designade klientbaserad state management med persistens för AI-drivna diagnostikflöden. Implementerade internationellisering (i18n) med stöd för 7 språk.',
+    title: 'UX/UI-omdesign & Design av Nytt Onboardingflöde',
     image: '/images/carmy_design.png',
+    description: 'Tog initiativ till att förbättra Carmys onboarding- och autentiseringsflöden genom att identifiera friktion i användarresan under interna produktgranskningar. Utvecklade ett konceptuellt förslag som visualiserade appens kärnvärde innan kontoskapande, vilket tydliggjorde produktens AI-drivna diagnostikfunktioner redan i första interaktionen. Genomförde UX- och produktresearch för att validera hypoteser, skapade wireframes och high-fidelity design i Figma samt definierade förbättrad informationshierarki, komponentstruktur och visuellt system. Implementerade samtliga godkända designförändringar i React Native-applikationen. Refaktorerade frontend-arkitekturen genom att separera UI-komponenter, affärslogik och navigationslager för ökad skalbarhet och långsiktig underhållbarhet.',
     stack: [
-      'React Native',
-      'Expo',
-      'TypeScript',
       'Figma',
-      'Zustand',
-      'i18n',
-      'Clerk',
-      'GitLab'
+      'User Research',
+      'UX Analysis',
+      'Wireframing',
+      'High-Fidelity Prototyping',
+      'Design System'
     ],
     github: '',
     link: '',
@@ -57,8 +55,12 @@ export const projectsData: Project[] = [
     category: 'Mobile',
     company: 'Carmy AB',
     mediaType: 'mobile',
-    title: 'Frontend-refaktorering & Skalbar Arkitektur',
-    description: 'Ledde implementationen av den godkända redesignen och refaktorerade frontend-arkitekturen för ökad skalbarhet och underhållbarhet. Omstrukturerade projektets mappstruktur och separerade UI-komponenter från affärslogik och navigationslager. Extraherade inline-kod till återanvändbara komponenter och delade hooks för bättre modularitet. Implementerade klientbaserad state management med Zustand och persistens för AI-drivna diagnosflöden. Förbättrade autentiseringsflöden och anpassade navigationen efter den nya UX-strukturen. Implementerade internationellisering (i18n) med stöd för 7 språk.',
+    title: 'Mobil Frontend Arkitektur & Produktutveckling',
+    description: `
+    Ledde implementationen av den godkända redesignen och refaktorerade frontend-arkitekturen för ökad skalbarhet och långsiktig underhållbarhet. 
+    Omstrukturerade projektets mappstruktur och separerade UI-komponenter, affärslogik och navigationslager enligt en mer modulär arkitektur. Extraherade inline-kod till återanvändbara komponenter och custom hooks för förbättrad läsbarhet och återanvändbarhet.
+    Implementerade klientbaserad state management med Zustand inklusive persistens för AI-drivna diagnosflöden. Förbättrade autentiseringsflöden samt anpassade navigationsstrukturen efter den nya UX-designen. 
+    Integrerade internationalisering (i18n) med stöd för 7 språk.`,
     image: ['/images/Carmy01.png', '/images/Carmy07.png', '/images/Carmy03.png', '/images/Carmy04.png', '/images/Carmy06.png', '/images/Carmy07.png', '/images/Carmy08.png', '/images/Carmy09.png', '/images/Carmy10.png'],
     stack: [
       'React Native',
@@ -77,7 +79,7 @@ export const projectsData: Project[] = [
   {
     category: 'Mobile',
     company: 'Finanstid AB',
-    title: 'Mobile Application Development',
+    title: 'Utveckling av Nyhetsapp i React Native',
     mediaType: 'web',
     description: 'Fullt utvecklad nyhetsapp för Finanstid AB. Byggd från grunden av mig med React Native. Innehåller sök, pushnotiser och formulär. Sluttestas nu inför publicering på Google Play och App Store. Projektet utvecklades och testades i Android Studio och Xcode.',
     image: ['/images/finanstid_1.png', '/images/finanstid_2.png'],
@@ -93,7 +95,7 @@ export const projectsData: Project[] = [
   {
     category: 'UX / Design',
     company: 'Finanstid AB',
-    title: 'UX/UI Redesign',
+    title: 'Visuell Omdesign & Design System',
     mediaType: 'design',
     description: 'Genomförde en fullständig redesign av Finanstids visuella identitet i Figma för både webb och mobilapp. Arbetet inkluderade förbättrad informationshierarki, moderniserad typografi, färgsystem samt konsekvent komponentstruktur för att skapa en mer läsbar och användarvänlig upplevelse. Designprocessen omfattade wireframes, high-fidelity mockups och responsiva layouter för olika skärmstorlekar.',
     image: [
