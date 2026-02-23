@@ -1,55 +1,192 @@
 'use client'
-import React, { useState } from 'react'
-import { Project } from '../data/projectsData'
-import Link from 'next/link'
 
-const ProjectCard = ({ project }: { project: Project }) => {
+import React, { useState, useMemo } from 'react'
+import { Project } from '../data/projectsData'
+
+type Props = {
+  project: Project
+}
+
+const ProjectCard = ({ project }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [previewImage, setPreviewImage] = useState<string | null>(null)
+  const [previewVideo, setPreviewVideo] = useState<string | null>(null)
+  const [carouselIndex, setCarouselIndex] = useState(0)
 
-  const imageClasses = `
-    rounded-xl
-    object-contain
-    max-h-[230px]
-    transition-transform
-    duration-300
-    hover:scale-115
-  `
+  const { image, video } = project
+  const isImageArray = Array.isArray(image)
+  const youtubeUrl = video
+    ? `https://www.youtube.com/embed/${video}?autoplay=1`
+    : null
+
+  const isMobile = project.mediaType === 'mobile'
+  const isDesign = project.mediaType === 'design'
+
+  const visibleImages = useMemo(() => {
+    if (!isImageArray) return []
+
+    const total = image.length
+    const maxVisible = Math.min(2, total)
+
+    return Array.from({ length: maxVisible }, (_, i) => {
+      const index = (carouselIndex + i) % total
+      return {
+        src: image[index],
+        index,
+      }
+    })
+  }, [image, carouselIndex, isImageArray])
+
+  const nextSlide = () => {
+    if (!isImageArray) return
+    setCarouselIndex((prev) => (prev + 1) % image.length)
+  }
+
+  const prevSlide = () => {
+    if (!isImageArray) return
+    setCarouselIndex((prev) =>
+      prev === 0 ? image.length - 1 : prev - 1
+    )
+  }
+
+
+  const PhoneFrame = ({
+    children,
+  }: {
+    children: React.ReactNode
+  }) => (
+    <div className="h-[250px] flex justify-center items-center">
+      <div className="bg-black p-[3px] rounded-[28px] shadow-lg ">
+        <div className="rounded-[23px] overflow-hidden bg-black h-full  flex items-center">
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+
+  const renderImage = (src: string, index: number) => {
+    if (isMobile) {
+      return (
+        <PhoneFrame key={index}>
+          <img
+            src={src}
+            alt={project.title}
+            onClick={() => setPreviewImage(src)}
+            className="w-auto max-h-[240px] object-cover cursor-zoom-in"
+          />
+        </PhoneFrame>
+      )
+    }
+    if (isDesign) {
+      return (
+        <div key={index} className="h-[250px] flex items-center justify-center">
+          <img
+            src={src}
+            alt={project.title}
+            onClick={() => setPreviewImage(src)}
+            className="max-h-full w-auto object-contain cursor-zoom-in"
+          />
+        </div>
+      )
+    }
+    return (
+      <div
+        key={index}
+        className="w-full h-[250px] overflow-hidden flex items-center justify-center "
+      >
+        <img
+          src={src}
+          alt={project.title}
+          onClick={() => setPreviewImage(src)}
+          className="max-h-full w-auto object-contain cursor-zoom-in rounded-xl"
+        />
+      </div>
+    )
+  }
 
   return (
     <>
-      <div className="min-w-[300px] bg-white rounded-xl shadow-md overflow-hidden transition hover:shadow-xl flex flex-col">
-        <div className="bg-[var(--color-beige)] py-2 justify-center flex items-center h-[240px] gl:h-[280px]">
-          {project.image && Array.isArray(project.image) ? (
-            <div className={`flex ${project.image.length > 1 ? 'flex-row' : 'flex-col'} gap-4 items-center justify-center`}>
-              {project.image.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt={`${project.title} bild ${i + 1}`}
-                  onClick={() => setPreviewImage(src)}
-                  className={`${imageClasses} cursor-zoom-in ${(project.image && project.image.length > 1) ? 'flex-1 max-w-[200px]' : 'w-full h-[240px] object-cover'}`}
-                />
-              ))}
+      <div className="min-w-[300px] bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 flex flex-col overflow-hidden ">
+        <div className="bg-[var(--color-beige)] h-[260px] relative overflow-hidden py-1">
+          {video ? (
+            <div
+              className="relative w-full h-full cursor-pointer group"
+              onClick={() => setPreviewVideo(youtubeUrl)}
+            >
+              <img
+                src={project.thumbnail
+                  ? project.thumbnail
+                  : `https://img.youtube.com/vi/${video}/hqdefault.jpg`
+                }
+                alt="Video thumbnail"
+                className="w-full object-top object-cover"
+              />
+
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                <div className="bg-black px-4 py-2 rounded-full text-white text-lg">
+                  ▶
+                </div>
+              </div>
             </div>
-          ) : (
-            <img
-              src={typeof project.image === 'string' ? project.image : ''}
-              alt={project.title}
-              onClick={() => setPreviewImage(typeof project.image === 'string' ? project.image : '')}
-              className={`${imageClasses} w-full h-[240px] object-contain cursor-zoom-in`}
-            />
-          )}
+
+          ) : isImageArray && image.length > 0 ? (
+            <div className="w-full flex items-center justify-center relative">
+              {image.length > 2 && (
+                <>
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-0 z-10 px-3 text-2xl text-[var(--color-accent)]"
+                  >
+                    &#8592;
+                  </button>
+
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-0 z-10 px-3 text-2xl text-[var(--color-accent)]"
+                  >
+                    &#8594;
+                  </button>
+                </>
+              )}
+
+              <div className="flex justify-center items-center gap-4">
+                {visibleImages.map(({ src, index }) =>
+                  renderImage(src, index)
+                )}
+              </div>
+            </div>
+
+          ) : typeof image === 'string' ? (
+
+            <div className="w-full flex items-center justify-center">
+              {renderImage(image, 0)}
+            </div>
+
+          ) : null}
         </div>
 
-        <div className="p-4 flex flex-col flex-grow">
+        <div className="p-5 flex flex-col flex-grow">
           <div className="flex-grow">
-            <h2 className="text-[var(--color-text-main)]">{project.category}</h2>
-            <h3 className="text-xl text-[var(--color-accent)] font-semibold">{project.title}</h3>
-            <p className={`text-sm text-gray-600 mt-1 ${!isExpanded ? 'line-clamp-3' : ''}`}>
+            <p className="text-sm text-[var(--color-text-main)]">
+              {project.category}
+            </p>
+
+            <h3 className="text-xl font-semibold text-[var(--color-accent)]">
+              {project.company}
+            </h3>
+
+            <h4 className="text-lg font-semibold text-[var(--color-text-main)]">
+              {project.title}
+            </h4>
+
+            <p
+              className={`text-sm text-gray-600 mt-2 ${!isExpanded ? 'line-clamp-3' : ''
+                }`}
+            >
               {project.description}
             </p>
-            {project.description.length > 100 && (
+
+            {project.description && project.description.length > 120 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-[var(--color-accent)] hover:underline text-sm mt-1"
@@ -59,58 +196,48 @@ const ProjectCard = ({ project }: { project: Project }) => {
             )}
 
             <div className="mt-4 flex flex-wrap gap-2 text-sm">
-              {project.stack.map((tech) => (
-                <span key={tech} className="bg-gray-100 text-gray-900 px-2 py-1 rounded">
+              {(project.stack ?? []).map((tech) => (
+                <span
+                  key={tech}
+                  className="bg-gray-100 text-gray-800 px-2 py-1 rounded-md"
+                >
                   {tech}
                 </span>
               ))}
             </div>
           </div>
-
-          <div className="mt-4 flex gap-4">
-            {project.privateRepo ? (
-              <p className="text-xs text-[var(--color-hover)] mt-2">
-                🔒 Privat repo, delas gärna vid intervju
-              </p>
-            ) : (
-              project.github?.startsWith('http') && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[var(--color-hover)] hover:underline text-sm"
-                >
-                  GitHub
-                </a>
-              )
-            )}
-          </div>
-
-          {project.link && (
-            <Link href={project.link}>
-              <span className="text-[var(--color-accent)] hover:underline">
-                {project.category === 'App' ? 'Google Play' : 'Länk till webbsida'}
-              </span>
-            </Link>
-          )}
-
-          <p className="mt-4 text-xs text-gray-400 self-start">
-            {project.role} · {project.date}
-          </p>
         </div>
       </div>
 
-     
       {previewImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center cursor-zoom-out"
           onClick={() => setPreviewImage(null)}
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center cursor-zoom-out"
         >
           <img
             src={previewImage}
-            alt="Förhandsvisning"
-            className="max-w-full max-h-full rounded-lg transition duration-300"
+            alt="Preview"
+            className="max-w-full max-h-[80vh] rounded-lg"
           />
+        </div>
+      )}
+
+      {previewVideo && (
+        <div
+          onClick={() => setPreviewVideo(null)}
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center"
+        >
+          <div
+            className="relative w-[90vw] max-w-4xl aspect-video"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe
+              src={previewVideo}
+              className="w-full h-full rounded-xl"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          </div>
         </div>
       )}
     </>
