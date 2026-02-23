@@ -16,8 +16,11 @@ export type Project = {
   privateRepo?: boolean
   note?: string
   mediaType: 'mobile' | 'design' | 'web'
-
 }
+const CLOUD = "https://res.cloudinary.com/dewy6rf3i/image/upload";
+
+const cld = (publicId: string) =>
+  `${CLOUD}/w_800,q_auto,f_auto/${publicId}`;
 
 export const projectsData: Project[] = [
   {
@@ -25,7 +28,16 @@ export const projectsData: Project[] = [
     company: 'FixMeApp AB',
     mediaType: 'mobile',
     title: 'Cross-Platform Frontend & Arkitektur för AI-driven Bokningsplattform',
-    image: ['/images/FixmeappPrompt 1.png', '/images/FixmeappPrompt.png', '/images/Fixmeapp3.png', '/images/Fixmeapp4.png', '/images/Fixmeapp5.png', '/images/Fixmeapp6.png', '/images/Fixmeapp7.png'],
+    image: [
+    cld("Fixmeapp4_nwe1pr"),
+    cld("FixmeappPrompt_2_sa8lej"),
+    cld("FixmeappPrompt_ofvuie"),
+    cld("Fixmeapp3_sduhgc"),
+    cld("Fixmeapp5_pbwuen"),
+    cld("Fixmeapp7_fmulqd"),
+    cld("Fixmeapp6_t3ekol"),
+    cld("Fixmeapp8_tgdbdw")
+  ],
     description: 'Arbetade som frontendutvecklare i utvecklingen av en AI-driven bokningsplattform. Ansvarade för cirka 80 % av frontend-delen och drev implementationen end-to-end i nära samarbete med seniora utvecklare. Byggde mobilapplikationen från grunden och Migrerade webbkomponenter till återanvändbara cross-platform-komponenter (React & React Native) och minskade duplicerad implementation med ~40 %, Implementerade core booking-flows inklusive profiler för användare, arbetare och leverantörer (salonger/frilansare). Fokuserade på clean och skalbar arkitektur med tydlig separation of concerns, isolerad affärslogik via custom hooks samt strukturerad folderstruktur. Använde React Query för API-integration mot FastAPI-backend och säkerställde konsekvent hantering av server state. Utvecklade dynamiska komponenter anpassade efter AI-baserade prompt-intentioner och var aktivt involverad i UX-processen för att säkerställa tydliga och användarcentrerade flöden.',
     stack: ['Next.js', 'React Native', 'Expo', 'TypeScript', 'Redux Toolkit', 'React Query', 'FastAPI', 'Orval'],
     role: 'Frontend Developer',
@@ -61,7 +73,16 @@ export const projectsData: Project[] = [
     Omstrukturerade projektets mappstruktur och separerade UI-komponenter, affärslogik och navigationslager enligt en mer modulär arkitektur. Extraherade inline-kod till återanvändbara komponenter och custom hooks för förbättrad läsbarhet och återanvändbarhet.
     Implementerade klientbaserad state management med Zustand inklusive persistens för AI-drivna diagnosflöden. Förbättrade autentiseringsflöden samt anpassade navigationsstrukturen efter den nya UX-designen. 
     Integrerade internationalisering (i18n) med stöd för 7 språk.`,
-    image: ['/images/Carmy01.png', '/images/Carmy07.png', '/images/Carmy03.png', '/images/Carmy04.png', '/images/Carmy06.png', '/images/Carmy07.png', '/images/Carmy08.png', '/images/Carmy09.png', '/images/Carmy10.png'],
+    image: [
+      cld("Carmy05_hiuxuy"),
+      cld("Carmy10_yk2lqx"),
+      cld("Carmy08_yvxmkq"),
+      cld("Carmy06_adrhig"),
+      cld("Carmy04_thtc1o"),
+      cld("Carmy07_vaxspj"),
+      cld("Carmy03_fjtulq"), 
+      cld("Carmy09_qxgeu7"),
+    ],
     stack: [
       'React Native',
       'Expo',
@@ -114,14 +135,7 @@ export const projectsData: Project[] = [
   },
   {
     category: 'Mobile',
-    title: 'World Meditations',
-    mediaType: 'web',
-    date: 'Januari 2025 - nu',
-  },
-
-  {
-    category: 'App',
-    title: 'World Meditations',
+    title: 'World Meditations', mediaType: 'web',
     description: 'Meditationsapp med integrerad ljudspelare. Jag bidrog till en vidareutvecklad version av appen där jag implementerade navigeringsknappar för föregående/nästa spår, ersatte hårdkodad innehåll med dynamisk data från Firebase, samt testade stöd för nedladdning och uppspelning av ljud offline.Projektet utvecklades och testades i Android Studio.',
     image: ['/images/w_meditations.png', '/images/w_meditations_1.png'],
     stack: ['React Native', 'TypeScript', 'Node.js', 'Firebase', 'Express.js',],

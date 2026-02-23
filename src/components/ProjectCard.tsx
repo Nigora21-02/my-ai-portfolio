@@ -186,7 +186,7 @@ const ProjectCard = ({ project }: Props) => {
               {project.description}
             </p>
 
-            {project.description.length > 120 && (
+            {project.description && project.description.length > 120 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="text-[var(--color-accent)] hover:underline text-sm mt-1"
@@ -196,7 +196,7 @@ const ProjectCard = ({ project }: Props) => {
             )}
 
             <div className="mt-4 flex flex-wrap gap-2 text-sm">
-              {project.stack.map((tech) => (
+              {(project.stack ?? []).map((tech) => (
                 <span
                   key={tech}
                   className="bg-gray-100 text-gray-800 px-2 py-1 rounded-md"
