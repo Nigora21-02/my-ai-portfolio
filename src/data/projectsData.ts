@@ -1,12 +1,12 @@
 export type Project = {
   title: string
   company?: string
-  description: string
+  description?: string
   extendedDescription?: string
   image?: string | string[]
   video?: string
   thumbnail?: string
-  stack: string[]
+  stack?: string[]
   github?: string
   live?: string
   role: string
