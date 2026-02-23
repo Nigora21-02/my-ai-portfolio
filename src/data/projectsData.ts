@@ -6,8 +6,6 @@ export type Project = {
   image?: string | string[]
   video?: string
   thumbnail?: string
-  description: string
-  image?: string | string[]
   stack: string[]
   github?: string
   live?: string
