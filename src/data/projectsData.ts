@@ -6,6 +6,8 @@ export type Project = {
   image?: string | string[]
   video?: string
   thumbnail?: string
+  description: string
+  image?: string | string[]
   stack: string[]
   github?: string
   live?: string
@@ -116,6 +118,12 @@ export const projectsData: Project[] = [
     category: 'Mobile',
     title: 'World Meditations',
     mediaType: 'web',
+    date: 'Januari 2025 - nu',
+  },
+
+  {
+    category: 'App',
+    title: 'World Meditations',
     description: 'Meditationsapp med integrerad ljudspelare. Jag bidrog till en vidareutvecklad version av appen där jag implementerade navigeringsknappar för föregående/nästa spår, ersatte hårdkodad innehåll med dynamisk data från Firebase, samt testade stöd för nedladdning och uppspelning av ljud offline.Projektet utvecklades och testades i Android Studio.',
     image: ['/images/w_meditations.png', '/images/w_meditations_1.png'],
     stack: ['React Native', 'TypeScript', 'Node.js', 'Firebase', 'Express.js',],
