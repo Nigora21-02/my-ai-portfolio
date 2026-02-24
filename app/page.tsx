@@ -15,20 +15,17 @@ export default function Home() {
 
       <div style={{ background: 'var(--gradient-bg)' }}>
         <div className="text-center max-w-2xl mx-auto space-y-4 p-6 pt-12">
-          <h2 className="text-2xl font-semibold text-[var(--color-text-main)] border-b-2 border-[var(--color-border)] w-fit mx-auto pb-2">
-            Frontend & Mobile Developer
+          <h2 className="text-xl font-semibold text-[var(--color-text-main)] border-b-2 border-[var(--color-border)] w-fit mx-auto pb-2">
+            Varje projekt jag tar mig an börjar med en tanke: Hur ska detta kännas att använda?
           </h2>
 
           <p className="text-[var(--color-text-main)] leading-relaxed">
-            Hej! Jag är Nigora 👋 Jag bygger smarta, AI-drivna gränssnitt med <span className="font-semibold text-[var(--color-accent)]">React</span>, <span className="font-semibold text-[var(--color-accent)]">React Native</span> och <span className="font-semibold text-[var(--color-accent)]">Next.js</span> - alltid med fokus på användarupplevelse och kärlek för detaljer.
+            Jag heter Nigora - frontendutvecklare som bygger broar mellan  <span className="font-semibold text-[var(--color-accent)]">DESIGN,</span> <span className="font-semibold text-[var(--color-accent)]">KOD </span><span>och</span> <span className="font-semibold text-[var(--color-accent)]">AI.</span>
           </p>
 
-          <p className="text-[var(--color-text-light)] leading-relaxed">
-            Det här är <strong>Docka</strong> - min AI-assistent. Hon känner till mina projekt, styrkor och kan guida dig genom min digitala portfolio, svara på dina frågor och visa vad jag kan som utvecklare.
-          </p>
-
-          <p className=" text-[var(--color-accent)] font-medium">
-            Fråga på - vi är här för att göra ditt besök både enklare och mer inspirerande! 😊
+          <p className=" text-[var(--color-text-main)] font-medium">
+            Jag tänker arkitektur, jobbar nära produkt och levererar struktur som håller.
+            Nyfiken? <span className="font-semibold text-[var(--color-accent)]">Dockan</span> berättar mer.
           </p>
         </div>
 
