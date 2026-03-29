@@ -143,7 +143,7 @@ export default function AvatarModel({ isSpeaking, text }: AvatarProps) {
           <Visuals />
           <OfficeRoom />
           <Lampa />
-          <Avatar isSpeaking={isSpeaking} text={text} />
+          
         </Suspense>
       </Canvas>
     </div>
